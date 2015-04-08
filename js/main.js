@@ -18,5 +18,3 @@ $(window).load(
 										: "Basic");
 					});
 		});
-
-// test

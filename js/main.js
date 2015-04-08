@@ -9,4 +9,6 @@ $(window).load(function(){
 	$('.contents').on("click", function(){
 		$('#textbox').html($('#textbox').html() == "Basic" ? "Sample" : "Basic");				
 	});
+	
+	// testing commit
 });

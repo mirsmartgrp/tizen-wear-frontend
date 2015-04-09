@@ -14,7 +14,7 @@ tmp/
 local.properties
 .settings/
 .loadpath
-
+.build
 # Eclipse Core
 
 # External tool builders

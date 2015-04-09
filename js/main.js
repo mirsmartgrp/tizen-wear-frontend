@@ -16,5 +16,8 @@ $(window).load(
 						$('#textbox').html(
 								$('#textbox').html() == "Basic" ? "Sample"
 										: "Basic");
+						connect();
+						console.log("Try connecting")
 					});
+		
 		});

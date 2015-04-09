@@ -12,6 +12,9 @@ function onSuccess(agents)
 	{
 		console.log(i + ": " + agents[i].name);
 	}
+	SAAgent.setServiceConnectionListener(connectioncallback);
+	SAAgent.setPeerAgentFindListener(peeragentfindcallback);
+	
 }
 
 function ondevicestatus(type, status)
@@ -32,7 +35,7 @@ var connectioncallback = {
 	/* Remote peer agent requests a service connection */
 	onrequest : function(peerAgent)
 	{
-		if (peerAgent.appName == "expected app name")
+		if (peerAgent.appName == "HelloAccessoryProvider")
 		{
 			SAAgent.acceptServiceConnectionRequest(peerAgent);
 		}
@@ -65,7 +68,7 @@ var connectioncallback = {
 		}
 		else
 		{
-			if (peerAgent.appName === 'expected app name')
+			if (peerAgent.appName === "HelloAccessoryProvider")
 			{
 				SAAgent.acceptServiceConnectionRequest(peerAgent);
 			}
@@ -84,7 +87,8 @@ var connectioncallback = {
 
 function onpeeragentfound(peerAgent)
 {
-	if (peerAgent.appName == "expected app name")
+	console.log("PEER FOUND!");
+	if (peerAgent.appName == "")
 	{
 		SAAgent.requestServiceConnection(peerAgent);
 	}
@@ -92,6 +96,7 @@ function onpeeragentfound(peerAgent)
 
 function onpeeragentupdated(peerAgent, status)
 {
+	console.log("PEER UPDATED!");
 	if (status == "AVAILABLE")
 	{
 		SAAgent.requestServiceConnection(peerAgent);
@@ -103,14 +108,39 @@ function onpeeragentupdated(peerAgent, status)
 	}
 }
 
-var peeragentfindcallback = {
+var peeragentfindcallback = {	
 	onpeeragentfound : onpeeragentfound,
-	onpeeragentupdated : onpeeragentupdated
+	onpeeragentupdated : onpeeragentupdated,
+	onerror: onError
 };
 
-SAAgent.setServiceConnectionListener(connectioncallback);
-webapis.sa.setDeviceStatusListener(ondevicestatus);
-webapis.sa.requestSAAgent(onsuccess, onerror);
+	try
+	{
+		webapis.sa.requestSAAgent(onSuccess, onError);
+		webapis.sa.setDeviceStatusListener(ondevicestatus);
+
+	}
+	catch (err)
+	{
+		console.log(err);
+	}
+
+function connect()
+{
+	if (SAAgent != undefined)
+	{
+		try{
+			SAAgent.findPeerAgents();
+		
+		}catch(err){
+			console.log(err);
+		}
+	}
+	else
+	{
+		console.log("SAAgent undefined!");
+	}
+}
 
 function sendData(data)
 {

@@ -3,7 +3,7 @@
     <application name="ExerciseControllAppFrontend" >
         <serviceProfile
             id="/system/exercise"
-            name="helloaccessory"
+            name="exercisecontrol"
             role="consumer"
             version="2.0" >
             <supportedTransports>

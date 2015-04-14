@@ -96,15 +96,15 @@ function onpeeragentfound(peerAgent)
 
 function onpeeragentupdated(peerAgent, status)
 {
-	console.log("PEER UPDATED!");
+
 	if (status == "AVAILABLE")
 	{
+		console.log("PEER AVAILABLE!")
 		SAAgent.requestServiceConnection(peerAgent);
 	}
 	else if (status == "UNAVAILABLE")
 	{
-		console
-				.log("Uninstalled application package of peerAgent on remote device.");
+		console.log("Uninstalled application package of peerAgent on remote device.");
 	}
 }
 

@@ -1,5 +1,11 @@
 var SAAgent;
 
+function onReceive(id,data)
+{
+	console.log(data);
+	sendData("Received Message!");
+}
+
 function onError(error)
 {
 	console.log(error);
@@ -14,7 +20,7 @@ function onSuccess(agents)
 	}
 	SAAgent.setServiceConnectionListener(connectioncallback);
 	SAAgent.setPeerAgentFindListener(peeragentfindcallback);
-	
+
 }
 
 function ondevicestatus(type, status)
@@ -35,7 +41,7 @@ var connectioncallback = {
 	/* Remote peer agent requests a service connection */
 	onrequest : function(peerAgent)
 	{
-		if (peerAgent.appName == "HelloAccessoryProvider")
+		if (peerAgent.appName == "BackenSenderTizen")
 		{
 			SAAgent.acceptServiceConnectionRequest(peerAgent);
 		}
@@ -68,7 +74,7 @@ var connectioncallback = {
 		}
 		else
 		{
-			if (peerAgent.appName === "HelloAccessoryProvider")
+			if (peerAgent.appName === "BackenSenderTizen")
 			{
 				SAAgent.acceptServiceConnectionRequest(peerAgent);
 			}
@@ -82,15 +88,24 @@ var connectioncallback = {
 	onconnect : function(socket)
 	{
 		SASocket = socket;
+		try{
+		socket.setDataReceiveListener(onReceive);
+		}catch(e){
+			console.log(e);
+		}
 	}
 }
+
+
+
 
 function onpeeragentfound(peerAgent)
 {
 	console.log("PEER FOUND!");
-	if (peerAgent.appName == "")
+	if (peerAgent.appName == "BackenSenderTizen")
 	{
 		SAAgent.requestServiceConnection(peerAgent);
+
 	}
 }
 
@@ -101,38 +116,56 @@ function onpeeragentupdated(peerAgent, status)
 	{
 		console.log("PEER AVAILABLE!")
 		SAAgent.requestServiceConnection(peerAgent);
+		console.log("ADD Recive Listener!");
+		try
+		{
+			addReciveListener(function(data)
+			{
+				console.log("DATA collected!");
+				console.log(data);
+			});
+		}
+		catch (e)
+		{
+			console.log(e);
+		}
 	}
 	else if (status == "UNAVAILABLE")
 	{
-		console.log("Uninstalled application package of peerAgent on remote device.");
+		console
+				.log("Uninstalled application package of peerAgent on remote device.");
 	}
 }
 
-var peeragentfindcallback = {	
+var peeragentfindcallback = {
 	onpeeragentfound : onpeeragentfound,
 	onpeeragentupdated : onpeeragentupdated,
-	onerror: onError
+	onerror : onError
 };
 
-	try
-	{
-		webapis.sa.requestSAAgent(onSuccess, onError);
-		webapis.sa.setDeviceStatusListener(ondevicestatus);
 
-	}
-	catch (err)
-	{
-		console.log(err);
-	}
+try
+{
+	webapis.sa.requestSAAgent(onSuccess, onError);
+	webapis.sa.setDeviceStatusListener(ondevicestatus);
+
+}
+catch (err)
+{
+	console.log(err);
+}
 
 function connect()
 {
 	if (SAAgent != undefined)
 	{
-		try{
+		try
+		{
 			SAAgent.findPeerAgents();
-		
-		}catch(err){
+
+		}
+		catch (err)
+		{
 			console.log(err);
 		}
 	}
@@ -142,10 +175,16 @@ function connect()
 	}
 }
 
+
+
 function sendData(data)
 {
 	var channelID = 104;
+	try{
 	SASocket.sendData(channelID, data);
+	}catch(e){
+		console.log(e);
+	}
 }
 
 function addReciveListener(callback)

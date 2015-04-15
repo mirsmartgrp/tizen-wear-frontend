@@ -1,9 +1,27 @@
 var SAAgent;
 
-function onReceive(id,data)
+var receiveCallbacks = [];
+
+
+function addReceiveListener(callback){
+	receiveCallbacks[receiveCallbacks.length]= callback;
+}
+
+
+function removeReceiveListener(callback){
+	for(var i = 0;i<receiveCallbacks.length;i++){
+		if(receiveCallbacks[i] == callback){
+			receiveCallbacks.splice($.inArray(callback, receiveCallbacks),1);
+		}
+	}
+}
+
+
+function onReceive(id, data)
 {
-	console.log(data);
-	sendData("Received Message!");
+	for(var i = 0;i<receiveCallbacks.length;i++){
+		receiveCallbacks[i](id,data);
+	}
 }
 
 function onError(error)
@@ -54,8 +72,7 @@ var connectioncallback = {
 	{
 		if (typeof (SAAgent.authenticatePeerAgent) === 'function')
 		{
-			SAAgent.authenticatePeerAgent(peerAgent, function(peerAgent,
-					authToken)
+			SAAgent.authenticatePeerAgent(peerAgent, function(peerAgent, authToken)
 			{
 				/* Authentication token of peer agent arrives */
 				if (authToken.key == "expected key string (BASE64)")
@@ -88,16 +105,16 @@ var connectioncallback = {
 	onconnect : function(socket)
 	{
 		SASocket = socket;
-		try{
-		socket.setDataReceiveListener(onReceive);
-		}catch(e){
+		try
+		{
+			socket.setDataReceiveListener(onReceive);
+		}
+		catch (e)
+		{
 			console.log(e);
 		}
 	}
 }
-
-
-
 
 function onpeeragentfound(peerAgent)
 {
@@ -116,24 +133,10 @@ function onpeeragentupdated(peerAgent, status)
 	{
 		console.log("PEER AVAILABLE!")
 		SAAgent.requestServiceConnection(peerAgent);
-		console.log("ADD Recive Listener!");
-		try
-		{
-			addReciveListener(function(data)
-			{
-				console.log("DATA collected!");
-				console.log(data);
-			});
-		}
-		catch (e)
-		{
-			console.log(e);
-		}
 	}
 	else if (status == "UNAVAILABLE")
 	{
-		console
-				.log("Uninstalled application package of peerAgent on remote device.");
+		console.log("Uninstalled application package of peerAgent on remote device.");
 	}
 }
 
@@ -142,7 +145,6 @@ var peeragentfindcallback = {
 	onpeeragentupdated : onpeeragentupdated,
 	onerror : onError
 };
-
 
 try
 {
@@ -175,14 +177,15 @@ function connect()
 	}
 }
 
-
-
 function sendData(data)
 {
 	var channelID = 104;
-	try{
-	SASocket.sendData(channelID, data);
-	}catch(e){
+	try
+	{
+		SASocket.sendData(channelID, data);
+	}
+	catch (e)
+	{
 		console.log(e);
 	}
 }

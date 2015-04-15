@@ -1,23 +1,30 @@
-$(window).load(
-		function()
-		{
-			document.addEventListener('tizenhwkey', function(e)
-			{
-				if (e.keyName == "back")
-				{
-					tizen.application.getCurrentApplication().exit();
-				}
-			});
+function message(id, data)
+	{
+		console.log(id);
+		console.log(data);
+	}
 
-			$('.contents').on(
-					"click",
-					function()
-					{
-						$('#textbox').html(
-								$('#textbox').html() == "Basic" ? "Sample"
-										: "Basic");
-						connect();
-						console.log("Try connecting")
-					});
-		
-		});
+$(window).load(function()
+{
+	document.addEventListener('tizenhwkey', function(e)
+	{
+		if (e.keyName == "back")
+		{
+			tizen.application.getCurrentApplication().exit();
+		}
+	});
+
+	try{
+	addReceiveListener(message);
+	removeReceiveListener(message);
+	}catch(e){
+		console.log(e);
+	}
+	$('.contents').on("click", function()
+	{
+		$('#textbox').html($('#textbox').html() == "Basic" ? "Sample" : "Basic");
+		connect();
+		console.log("Try connecting")
+	});
+
+});

@@ -4,7 +4,7 @@
 
 body {
     margin: 0px auto;
-    background-color:#222;
+    background: #E6E6E6;
 }
 
 .contents {
@@ -20,4 +20,9 @@ body {
 	font-weight:bold;
 	font-size:5em;
 	color:#fff;
+}
+
+button {
+	height: 10em;
+	width: 10em;
 }

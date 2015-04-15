@@ -13,13 +13,32 @@
  
     <link rel="stylesheet" href="css/style.css" />
 </head>
+
 <body>
-  <div class=contents>
-  	<div style='margin:auto;'>
-  		<span class=content_text id=textbox>Basic</span>
-  	</div>
-  </div>
+	<div class="ui-page ui-page-active" id="main">
+		<header class="ui-header">
+			<h2 class="ui-title">Simple Sensor</h2>
+		</header>
+		<div class="ui-content content-padding">
+			<p style="font-size: 25px; border-bottom: 1px solid #fff; padding-bottom: 10px;">Pedometer Readings</p>
+			<ul class="ui-listview">			
+				
+				<li id="accelX" style="font-size: 20px">Accel X</li>
+				<li id="accelY" style="font-size: 20px">Accel Y</li>
+				<li id="accelZ" style="font-size: 20px">Accel Z</li>
+				
+				<li id="rotX" style="font-size: 20px">Rot X</li>
+				<li id="rotY" style="font-size: 20px">Rot Y</li>
+				<li id="rotZ" style="font-size: 20px">Rot Z</li>
+			</ul>
+			<button id="start">Start</button>
+			<button id="stop">Stop</button>
+		</div>
+	</div>
 </body>
-  
+
+<script src="js/DataCollector.js"></script>
+<script src="js/dbManager.js"></script>
+<script src="js/main.js"></script>
 
 </html>

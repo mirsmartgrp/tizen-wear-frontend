@@ -6,6 +6,8 @@ function message(id, data)
 
 $(window).load(function()
 {
+	document.getElementById("start").addEventListener("click",startingApp);
+	document.getElementById("stop").addEventListener("click",stoppingApp);
 	document.addEventListener('tizenhwkey', function(e)
 	{
 		if (e.keyName == "back")
@@ -28,3 +30,14 @@ $(window).load(function()
 	});
 
 });
+
+function startingApp()
+{
+	startDataCollector();
+}
+
+function stoppingApp()
+{
+	saveAsJSON();
+	stopDataCollector();
+}

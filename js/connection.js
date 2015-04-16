@@ -38,7 +38,7 @@ function onSuccess(agents)
 	}
 	SAAgent.setServiceConnectionListener(connectioncallback);
 	SAAgent.setPeerAgentFindListener(peeragentfindcallback);
-
+	connect();	
 }
 
 function ondevicestatus(type, status)
@@ -59,7 +59,7 @@ var connectioncallback = {
 	/* Remote peer agent requests a service connection */
 	onrequest : function(peerAgent)
 	{
-		if (peerAgent.appName == "BackenSenderTizen")
+		if (peerAgent.appName == "ConnectionHandlerTizen")
 		{
 			SAAgent.acceptServiceConnectionRequest(peerAgent);
 		}
@@ -91,7 +91,7 @@ var connectioncallback = {
 		}
 		else
 		{
-			if (peerAgent.appName === "BackenSenderTizen")
+			if (peerAgent.appName === "ConnectionHandlerTizen")
 			{
 				SAAgent.acceptServiceConnectionRequest(peerAgent);
 			}
@@ -119,7 +119,7 @@ var connectioncallback = {
 function onpeeragentfound(peerAgent)
 {
 	console.log("PEER FOUND!");
-	if (peerAgent.appName == "BackenSenderTizen")
+	if (peerAgent.appName == "ConnectionHandlerTizen")
 	{
 		SAAgent.requestServiceConnection(peerAgent);
 
@@ -190,7 +190,4 @@ function sendData(data)
 	}
 }
 
-function addReciveListener(callback)
-{
-	SASocket.setDataReciveListener(callback);
-}
+

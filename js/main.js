@@ -6,8 +6,10 @@ function message(id, data)
 
 $(window).load(function()
 {
+	try{
 	$("#start").click(startingApp);
 	$("#stop").click(stoppingApp);
+	
 	document.addEventListener('tizenhwkey', function(e)
 	{
 		if (e.keyName == "back")
@@ -19,7 +21,6 @@ $(window).load(function()
 	try
 	{
 		addReceiveListener(message);
-		removeReceiveListener(message);
 	}
 	catch (e)
 	{
@@ -31,6 +32,13 @@ $(window).load(function()
 		connect();
 		console.log("Try connecting")
 	});
+	$("#connect").click(function(){
+		sendData("WATCH TEST");
+	})
+	
+	}catch(e){
+		console.log(e);
+	}
 
 });
 

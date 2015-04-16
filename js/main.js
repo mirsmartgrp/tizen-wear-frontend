@@ -1,13 +1,13 @@
 function message(id, data)
-	{
-		console.log(id);
-		console.log(data);
-	}
+{
+	console.log(id);
+	console.log(data);
+}
 
 $(window).load(function()
 {
-	document.getElementById("start").addEventListener("click",startingApp);
-	document.getElementById("stop").addEventListener("click",stoppingApp);
+	$("#start").click(startingApp);
+	$("#stop").click(stoppingApp);
 	document.addEventListener('tizenhwkey', function(e)
 	{
 		if (e.keyName == "back")
@@ -16,10 +16,13 @@ $(window).load(function()
 		}
 	});
 
-	try{
-	addReceiveListener(message);
-	removeReceiveListener(message);
-	}catch(e){
+	try
+	{
+		addReceiveListener(message);
+		removeReceiveListener(message);
+	}
+	catch (e)
+	{
 		console.log(e);
 	}
 	$('.contents').on("click", function()
@@ -33,11 +36,25 @@ $(window).load(function()
 
 function startingApp()
 {
-	startDataCollector();
+	try
+	{
+		startDataCollector();
+	}
+	catch (e)
+	{
+		console.log(e);
+	}
 }
 
 function stoppingApp()
 {
-	saveAsJSON();
-	stopDataCollector();
+	try
+	{
+		saveAsJSON();
+		stopDataCollector();
+	}
+	catch (e)
+	{
+		console.log(e);
+	}
 }

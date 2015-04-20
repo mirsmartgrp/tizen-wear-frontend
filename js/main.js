@@ -58,7 +58,7 @@ function stoppingApp()
 {
 	try
 	{
-		saveAsJSON();
+		sendToPhone();
 		stopDataCollector();
 	}
 	catch (e)

@@ -10,15 +10,18 @@ function saveAsJSON(){
 	
 	result.data =  dataset;
 
-	tizen.filesystem.resolve('documents', onResolveSuccess, onResolveError, 'rw');
-	
+	tizen.filesystem.resolve('documents', onResolveSuccess, onResolveError, 'rw');	
 	
 //	console.log(JSON.stringify(result));
-	
-
 }
 
-
+function sendToPhone()
+{
+	var dataset = getDataset();
+	result = {};
+	result.data =  dataset;
+	sendData(JSON.stringify(result));
+}
 
 var documentsDir;
 var file;

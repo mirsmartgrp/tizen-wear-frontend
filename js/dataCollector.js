@@ -59,6 +59,14 @@ function handleDataCollector(e)
 				roty = e.rotationRate.beta;
 				rotz = e.rotationRate.gamma;
 		
+				if(accelX == null){accelX = 0;}
+				if(accelY == null){accelY = 0;}
+				if(accelZ == null){accelZ = 0;}
+				
+				if(rotx == null){rotx = 0;}
+				if(roty == null){roty = 0;}
+				if(rotz == null){rotz = 0;}
+				
 				Dataset.push({
 					accel : {
 						x : accelX,

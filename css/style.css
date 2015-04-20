@@ -4,7 +4,7 @@
 
 body {
     margin: 0px auto;
-    background: #E6E6E6;
+    background-color:#222;
 }
 
 .contents {
@@ -15,14 +15,15 @@ body {
 	height:320px;
 }
 
+.content-padding {
+	margin-top: 16px;
+	margin-bottom: 16px;
+	padding-left: 16px;
+	padding-right: 16px;
+}
 
 .content_text {
 	font-weight:bold;
 	font-size:5em;
 	color:#fff;
-}
-
-button {
-	height: 10em;
-	width: 10em;
 }

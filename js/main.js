@@ -33,7 +33,7 @@ $(window).load(function()
 		console.log("Try connecting")
 	});
 	$("#connect").click(function(){
-		sendData("WATCH TEST");
+		tau.openPopup("#2btnPopup")
 	})
 	
 	}catch(e){

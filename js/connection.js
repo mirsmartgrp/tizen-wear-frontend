@@ -2,12 +2,18 @@ var SAAgent;
 
 var receiveCallbacks = [];
 
-
+/**
+ * Add a callback function to the listerner list. Callback is invoked when a message is received.
+ * @param callback the callback function which should be added to the listener list.
+ */
 function addReceiveListener(callback){
 	receiveCallbacks[receiveCallbacks.length]= callback;
 }
 
-
+/**
+ * Removes callback from list of listerns.
+ * @param callback function that should be removed from listener list
+ */
 function removeReceiveListener(callback){
 	for(var i = 0;i<receiveCallbacks.length;i++){
 		if(receiveCallbacks[i] == callback){
@@ -16,7 +22,11 @@ function removeReceiveListener(callback){
 	}
 }
 
-
+/**
+ * Callback for receiving messages. Informs listeners
+ * @param id
+ * @param data received data
+ */
 function onReceive(id, data)
 {
 	for(var i = 0;i<receiveCallbacks.length;i++){
@@ -24,11 +34,47 @@ function onReceive(id, data)
 	}
 }
 
+/**
+ * Send data to phone if phone is connected
+ * @param data String which should be send to the connected phone
+ */
+
+function sendData(data)
+{
+	var channelID = 104;
+	try
+	{
+		SASocket.sendData(channelID, data);
+	}
+	catch (e)
+	{
+		console.log(e);
+	}
+}
+
+
+
+/*
+*********************************************************************************
+*																				*
+*                 	Samsung Connetion methods									*
+*       		          DO NOT MODIFY !!!										*
+*                 																*
+*********************************************************************************
+*/
+/**
+ * Callback for handle exceptions
+ * @param error
+ */
 function onError(error)
 {
 	console.log(error);
 }
 
+/**
+ * Callback when a connection could be established
+ * @param agents
+ */
 function onSuccess(agents)
 {
 	SAAgent = agents[0];
@@ -41,6 +87,11 @@ function onSuccess(agents)
 	connect();	
 }
 
+/**
+ * Callback when status changed
+ * @param type
+ * @param status
+ */
 function ondevicestatus(type, status)
 {
 	if (status == "ATTACHED")
@@ -116,6 +167,11 @@ var connectioncallback = {
 	}
 }
 
+
+/**
+ * Callback when a new connection is found in findPeerAgents method
+ * @param peerAgent
+ */
 function onpeeragentfound(peerAgent)
 {
 	console.log("PEER FOUND!");
@@ -126,6 +182,11 @@ function onpeeragentfound(peerAgent)
 	}
 }
 
+/**
+ * Callback which is called when the status of the connected phone changes in findPeerAgents
+ * @param peerAgent
+ * @param status
+ */
 function onpeeragentupdated(peerAgent, status)
 {
 
@@ -157,6 +218,10 @@ catch (err)
 	console.log(err);
 }
 
+
+/**
+ * Try to connect to phone if no connection available
+ */
 function connect()
 {
 	if (SAAgent != undefined)
@@ -177,17 +242,6 @@ function connect()
 	}
 }
 
-function sendData(data)
-{
-	var channelID = 104;
-	try
-	{
-		SASocket.sendData(channelID, data);
-	}
-	catch (e)
-	{
-		console.log(e);
-	}
-}
+
 
 

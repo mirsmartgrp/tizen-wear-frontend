@@ -80,7 +80,8 @@ function handleDataCollector(e)
 					},
 					time : ((new Date().getTime()) - startTime) / 1000
 				});
-		
+				
+				$("#timer").html(((new Date().getTime()) - startTime) / 1000);
 				showData();
 			}
 			catch (e)

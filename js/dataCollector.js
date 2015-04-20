@@ -9,12 +9,18 @@ var startTime;
 var initTime;
 var checkTime;
 
-
+/**
+ * Returns a set of all data
+ * @returns {Array} Containing all rotation and acceleration data
+ */
 function getDataset()
 {
 	return Dataset;
 }
 
+/**
+ * Adds the listener to start the data collecting
+ */
 function startDataCollector()
 {
 	try
@@ -36,8 +42,10 @@ function stopDataCollector()
 	console.log("Stop DataCollector");
 }
 
-
-
+/**
+ * puts the data into a dataset with a timestamp
+ * @param e
+ */
 function handleDataCollector(e)
 {
 	initTime = new Date().getTime();
@@ -75,6 +83,9 @@ function handleDataCollector(e)
 		}
 }
 
+/**
+ * displays the collected data onto the screen
+ */
 function showData()
 {
 	try{

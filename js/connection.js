@@ -1,6 +1,7 @@
 var SAAgent;
 
 var receiveCallbacks = [];
+var popupCheck = false;
 
 /**
  * Add a callback function to the listerner list. Callback is invoked when a message is received.
@@ -69,6 +70,10 @@ function sendData(data)
 function onError(error)
 {
 	console.log(error);
+	if(popupCheck == false)
+	{
+		tau.openPopup("#ErrorPopup");
+	}
 }
 
 /**
@@ -102,6 +107,8 @@ function ondevicestatus(type, status)
 	else if (status == "DETACHED")
 	{
 		console.log("Detached remote peer device. : " + type);
+		tau.openPopup("#ErrorPopup");
+		SASocket = undefined;
 	}
 }
 
@@ -159,6 +166,7 @@ var connectioncallback = {
 		try
 		{
 			socket.setDataReceiveListener(onReceive);
+			tau.closePopup("#ErrorPopup");
 		}
 		catch (e)
 		{
@@ -175,7 +183,11 @@ var connectioncallback = {
 function onpeeragentfound(peerAgent)
 {
 	console.log("PEER FOUND!");
-	if (peerAgent.appName == "ConnectionHandlerTizen")
+	if(SASocket != undefined)
+	{
+		tau.closePopup("#ErrorPopup");
+	}
+	else if (peerAgent.appName == "ConnectionHandlerTizen")
 	{
 		SAAgent.requestServiceConnection(peerAgent);
 

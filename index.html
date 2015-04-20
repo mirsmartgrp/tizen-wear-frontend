@@ -17,32 +17,30 @@
 <body>
 	<div class="ui-page ui-page-active" id="main">
 		<header class="ui-header">
-			<h2 class="ui-title">Simple Sensor</h2>
+			<h2 class="ui-title">ExerciseController</h2>
 		</header>
+		
 		<div class="ui-content content-padding">
-			<p style="font-size: 25px; border-bottom: 1px solid #fff; padding-bottom: 10px;">Pedometer Readings</p>
-
-			<button id="start">Start</button>
-			<button id="stop">Stop</button>
-			
-			<button id="connect">Connect</button>
-		
-		
-		
+			<div style="font-size:1.5em; margin-bottom: 2em;">Time: <p id="timer" style="display:inline;"/></div>
+			<div style= "width:100%">
+				<div style="transform: translate(-50%); left:50%; position:absolute; height:4em;">
+				<button id="start" style="height: 100%;">Start</button>
+				<button id="stop" style="height: 100%;">Stop</button>
+				</div>
+			</div>	
 		</div>
-		<div id="2btnPopup" class="ui-popup">
-   <div class="ui-popup-header">Delete</div>
-   <div class="ui-popup-content">
-      Delete the image?
-   </div>
-   <div class="ui-popup-footer ui-grid-col-2">
-      <button id="2btnPopup-cancel" class="ui-btn">Cancel</button>
-      <button id="2btnPopup-ok" class="ui-btn">OK</button>
-   </div>
-</div>
 		
-		
+		<div id="ErrorPopup" class="ui-popup">
+		   <div class="ui-popup-content">
+		      A Connection to your Phone needs to be active!
+		      Please ensure that a connection is established.
+		      Have a nice day
+		      :3
+		   </div>
+		   <div class="ui-popup-footer ui-grid-col-2">
+		      <button id="ErrorPopup_Close" class="ui-btn">Close</button>
+		      <button id="ErrorPopup_Connect" class="ui-btn">Connect</button>
+		   </div>
+		</div>		
 </body>
-
-
 </html>

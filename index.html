@@ -2,10 +2,11 @@
 <html>
 <head>
 	<meta name="viewport" content="width=device-width,user-scalable=no"/>
-	<title>Tizen Wearable Web IDE - Tizen Wearable - jQuery</title>
+	<title>Exercise Control App</title>
 	<link rel="stylesheet"  href="lib/tau/wearable/theme/default/tau.min.css">
 	<!-- load theme file for your application -->
 	<link rel="stylesheet"  href="css/style.css">
+	<link rel="stylesheet"  href="css/main.css">
 	<script type="text/javascript" src="lib/tau/wearable/js/tau.min.js"></script>
 	<script type="text/javascript" src="js/jquery-1.9.1.js"></script>
     <script type="text/javascript" src="js/connection.js"></script>
@@ -16,29 +17,30 @@
  </head>
 <body>
 	<div class="ui-page ui-page-active" id="main">
-		<header class="ui-header">
-			<h2 class="ui-title">ExerciseController</h2>
-		</header>
-		
 		<div class="ui-content content-padding">
-			<div style="font-size:1.5em; margin-bottom: 1.5em; margin-top: 1.5em">Time: <p id="timer" style="display:inline;"/></div>
-				<div style="width: 100%; position: relative; display:-webkit-flex; -webkit-align-items: center;">
-				<button id="start" style="width: 50%; height: 3.5em">Start</button>
-				<button id="stop" style="width: 50%; height: 3.5em">Stop</button>
+			<div class="timerDiv">
+				<p id ="exerciseName">Exercise: TEST</p>
+				<span>Time:
+				   <span id="timer" style="display:inline;"></span> 
+				</span>
+			</div>
+			<div class="buttonDiv">
+				<button id="start">Start</button>
+				<button id="stop">Stop</button>
 			</div>	
 		</div>
-		
-		<div id="ErrorPopup" class="ui-popup">
-		   <div class="ui-popup-content">
-		      A Connection to your Phone needs to be active!
-		      Please ensure that a connection is established.
-		      Have a nice day
-		      :3
-		   </div>
-		   <div class="ui-popup-footer ui-grid-col-2">
-		      <button id="ErrorPopup_Close" class="ui-btn">Close</button>
-		      <button id="ErrorPopup_Connect" class="ui-btn">Connect</button>
-		   </div>
-		</div>		
+	</div>
+	<div id="ErrorPopup" class="ui-popup">
+	   <div class="ui-popup-content">
+	      <span>
+	      	A Connection to your Phone needs to be active!
+	      	Please ensure that a connection is established.
+	      </span>	
+		 </div>
+		<div class="ui-popup-footer ui-grid-col-2">
+	    	<button id="ErrorPopup_Close" class="ui-btn">Close</button>
+		    <button id="ErrorPopup_Connect" class="ui-btn">Connect</button>
+		</div>
+	</div>		
 </body>
 </html>

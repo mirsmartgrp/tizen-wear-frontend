@@ -20,14 +20,14 @@ $(window).load(function()
 
 		try
 		{
-			addReceiveListener(message);
+			connection.addReceiveListener(message);
 		}
 		catch (e)
 		{
 			console.log(e);
 		}
 	
-		$("#ErrorPopup").bind({popupshow: function(){popupCheck = true;}, popuphide:  function(){popupCheck = false;}});
+		$("#ErrorPopup").bind({popupshow: function(){connection.popupCheck = true;}, popuphide:  function(){connection.popupCheck = false;}});
 		
 		$('.contents').on("click", function()
 		{
@@ -59,7 +59,7 @@ function startingApp()
 {
 	try
 	{
-		startDataCollector();
+		dataCollector.startDataCollector();
 	}
 	catch (e)
 	{
@@ -71,8 +71,8 @@ function stoppingApp()
 {
 	try
 	{
-		sendToPhone();
-		stopDataCollector();
+		dbManager.sendToPhone();
+		dataCollector.stopDataCollector();
 	}
 	catch (e)
 	{

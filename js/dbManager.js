@@ -8,6 +8,7 @@ function saveAsJSON(){
 	
 	result = {};
 	
+	result.name = "test exercise";
 	result.data =  dataset;
 
 	tizen.filesystem.resolve('documents', onResolveSuccess, onResolveError, 'rw');	
@@ -19,6 +20,7 @@ function sendToPhone()
 {
 	var dataset = getDataset();
 	result = {};
+	result.name = "test exercise";
 	result.data =  dataset;
 	sendData(JSON.stringify(result));
 }

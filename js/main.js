@@ -10,6 +10,10 @@ $(window).load(function()
 		$("#start").click(startingApp);
 		$("#stop").click(stoppingApp);
 		
+		$("#exercise_arm_pull").click({exercisename: "pull_arm"}, setExercise);
+		$("#exercise_twist_arm").click({exercisename: "twist_arm"}, setExercise);
+		$("#exercise_shoulder").click({exercisename: "shoulder"}, setExercise);
+		
 		document.addEventListener('tizenhwkey', function(e)
 		{
 			if (e.keyName == "back")
@@ -60,6 +64,21 @@ function startingApp()
 	try
 	{
 		dataCollector.startDataCollector();
+	}
+	catch (e)
+	{
+		console.log(e);
+	}
+}
+
+function setExercise(event)
+{
+	try
+	{
+		var exercise = event.data.exercisename;
+		console.log(exercise);
+		dbManager.setExercise(exercise);
+		window.location = "index.html"
 	}
 	catch (e)
 	{

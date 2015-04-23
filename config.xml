@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <widget xmlns="http://www.w3.org/ns/widgets" xmlns:tizen="http://tizen.org/ns/widgets" id="http://yourdomain/ExerciseControllAppFrontend" version="1.0.0" viewmodes="maximized">
     <tizen:application id="r8sqOSYbtd.ExerciseControllAppFrontend" package="r8sqOSYbtd" required_version="2.2"/>
-    <content src="index.html"/>
+    <content src="exercises.html"/>
     <feature name="http://developer.samsung.com/tizen/feature/network.accessory_protocol"/>
     <feature name="http://tizen.org/feature/screen.size.all"/>
     <icon src="icon.png"/>

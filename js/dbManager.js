@@ -1,6 +1,17 @@
 var dbManager = (function(){
 	var my = {};
 	var result;
+	var exercise;
+	
+	/**
+	 * sets exercise name
+	 * @param exercisename
+	 */
+	my.setExercise = function(exercisename)
+	{
+		exercise = exercisename;
+		console.log("setExercise: " + exercise);
+	}
 	
 	/**
 	 * adds the Datasets into a Json file
@@ -10,7 +21,7 @@ var dbManager = (function(){
 		
 		result = {};
 		
-		result.name = "test exercise";
+		result.name = exercise;
 		result.data =  dataset;
 	
 		tizen.filesystem.resolve('documents', onResolveSuccess, onResolveError, 'rw');	
@@ -18,11 +29,14 @@ var dbManager = (function(){
 	//	console.log(JSON.stringify(result));
 	}
 	
+	/**
+	 * adds the Datasets into a Json file and sends it to the connected phone
+	 */
 	my.sendToPhone = function()
 	{
 		var dataset = dataCollector.getDataset();
 		result = {};
-		result.name = "test exercise";
+		result.name = exercise;
 		result.data =  dataset;
 		console.log(JSON.stringify(result));
 		connection.sendData(JSON.stringify(result));

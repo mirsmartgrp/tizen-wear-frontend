@@ -16,31 +16,37 @@
     <script src="js/lowBatteryCheck.js"></script>
  </head>
 <body>
-	<div class="ui-page ui-page-active" id="main">
-		<div class="ui-content content-padding">
-			<div class="timerDiv">
-				<p id ="exerciseName">Exercise: TEST</p>
-				<span>Time:
-				   <span id="timer" style="display:inline;"></span> 
-				</span>
+	<div id="exerciseMenu" style="visibility: visible;">
+		<table id="exerciseTable" style="width:100%; height:100%; font-size: 1.5em;">
+		</table>
+	</div>
+	<div id="mainBody" style="visibility: hidden;">
+		<div class="ui-page ui-page-active" id="main">
+			<div class="ui-content content-padding">
+				<div class="timerDiv">
+					<p id ="exerciseName">Exercise: TEST</p>
+					<span>Time:
+					   <span id="timer" style="display:inline;"></span> 
+					</span>
+				</div>
+				<div class="buttonDiv">
+					<button id="start">Start</button>
+					<button id="stop">Stop</button>
+				</div>	
 			</div>
-			<div class="buttonDiv">
-				<button id="start">Start</button>
-				<button id="stop">Stop</button>
-			</div>	
+		</div>
+		<div id="ErrorPopup" class="ui-popup">
+		   <div class="ui-popup-content">
+		      <span>
+		      	A Connection to your Phone needs to be active!
+		      	Please ensure that a connection is established.
+		      </span>	
+			 </div>
+			<div class="ui-popup-footer ui-grid-col-2">
+		    	<button id="ErrorPopup_Close" class="ui-btn">Close</button>
+			    <button id="ErrorPopup_Connect" class="ui-btn">Connect</button>
+			</div>
 		</div>
 	</div>
-	<div id="ErrorPopup" class="ui-popup">
-	   <div class="ui-popup-content">
-	      <span>
-	      	A Connection to your Phone needs to be active!
-	      	Please ensure that a connection is established.
-	      </span>	
-		 </div>
-		<div class="ui-popup-footer ui-grid-col-2">
-	    	<button id="ErrorPopup_Close" class="ui-btn">Close</button>
-		    <button id="ErrorPopup_Connect" class="ui-btn">Connect</button>
-		</div>
-	</div>		
 </body>
 </html>

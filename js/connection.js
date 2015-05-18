@@ -50,6 +50,7 @@ var connection = (function(){
 		var channelID = 104;
 		try
 		{
+			console.log(data);
 			SASocket.sendData(channelID, data);
 		}
 		catch (e)

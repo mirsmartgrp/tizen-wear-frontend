@@ -10,7 +10,6 @@ var dbManager = (function(){
 	my.setExercise = function(exercisename)
 	{
 		exercise = exercisename;
-		console.log("setExercise: " + exercise);
 	}
 	
 	/**

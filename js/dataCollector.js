@@ -30,6 +30,7 @@ var dataCollector = (function(){
 	{
 		try
 		{
+			Dataset = [];
 			window.addEventListener('devicemotion', handleDataCollector);
 			startTime = new Date().getTime();
 			checkTime = new Date().getTime() - 100;
@@ -73,12 +74,12 @@ var dataCollector = (function(){
 					if(rotz == null){rotz = 0;}
 					
 					Dataset.push({
-						accel : {
+						accelerometer : {
 							x : accelX,
 							y : accelY,
 							z : accelZ
 						},
-						gyro : {
+						gyroscope : {
 							x : accelX,
 							y : accelY,
 							z : accelZ
@@ -87,7 +88,6 @@ var dataCollector = (function(){
 					});
 					
 					$("#timer").html(((new Date().getTime()) - startTime) / 1000);
-					showData();
 				}
 				catch (e)
 				{
@@ -96,24 +96,6 @@ var dataCollector = (function(){
 				checkTime = initTime;		
 			}
 	}
-	
-	/**
-	 * displays the collected data onto the screen
-	 */
-	function showData()
-	{
-		try{
-		var x = 
-		$('#accelX').html('Accel X : ' + Math.round(accelX * 100) / 100);
-	 	$("#accelY").html('Accel Y : ' + Math.round(accelY * 100) / 100);
-		$("#accelZ").html('Accel Z : ' + Math.round(accelZ * 100) / 100);
-		$("#rotX").html("Rot X :" + Math.round(rotx * 100) / 100);
-		$("#rotY").html("Rot Y :" + Math.round(roty * 100) / 100);
-		$("#rotZ").html("Rot Z :" + Math.round(rotz * 100) / 100);
-		}catch(e){
-			console.log(e);
-		}
-	};
 	
 	return my;
 }($));

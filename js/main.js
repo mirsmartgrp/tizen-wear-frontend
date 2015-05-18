@@ -23,10 +23,6 @@ $(window).load(function()
 
 		});
 		
-		var element1 = document.getElementById("exerciseMenu");
-		tau.event.enableGesture(element1, new tau.event.gesture.Swipe());
-		element1.addEventListener("swipe", function(){});
-		
 		var element2 = document.getElementById("mainBody");
 		tau.event.enableGesture(element2, new tau.event.gesture.Swipe());
 		element2.addEventListener("swipe", function()
@@ -112,8 +108,14 @@ function readToStream(fileStream){
 
 function startingApp()
 {
+	window.setTimeout(bla, 3000);
+}
+
+function bla()
+{
 	try
 	{
+		navigator.vibrate(1000);
 		dataCollector.startDataCollector();
 	}
 	catch (e)
@@ -127,7 +129,6 @@ function setExercise(event)
 	try
 	{
 		var exercise = event.data.exercisename;
-		console.log(exercise);
 		dbManager.setExercise(exercise);
 		$('#exerciseName').html("Ex: "+ exercise);
 		document.getElementById('mainBody').style.visibility = 'visible';

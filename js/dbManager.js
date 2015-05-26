@@ -15,17 +15,26 @@ var dbManager = (function(){
 	/**
 	 * adds the Datasets into a Json file
 	 */
-	my.saveAsJSON = function(){
+	my.saveDatasetAsJSON = function(){
 		var dataset = dataCollector.getDataset();
 		
 		result = {};
 		
-		result.name = exercise;
-		result.data =  dataset;
+		result.guid = exercise;
+		result.sensorData =  dataset;
 	
 		tizen.filesystem.resolve('documents', onResolveSuccess, onResolveError, 'rw');	
 		
 	//	console.log(JSON.stringify(result));
+	}
+	
+	/**
+	 * adds the ExerciseList into a Json file
+	 */
+	my.saveExerciseListAsJSON = function(exerciseListString)
+	{
+		result = JSON.parse(exerciseListString);
+		tizen.filesystem.resolve('documents', onResolveSuccessExerciseList, onResolveError, 'rw');	
 	}
 	
 	/**
@@ -35,8 +44,8 @@ var dbManager = (function(){
 	{
 		var dataset = dataCollector.getDataset();
 		result = {};
-		result.name = exercise;
-		result.data =  dataset;
+		result.guid = exercise;
+		result.sensorData =  dataset;
 		console.log(JSON.stringify(result));
 		connection.sendData(JSON.stringify(result));
 	}
@@ -51,6 +60,16 @@ var dbManager = (function(){
 	function onResolveSuccess(dir) {
 		documentsDir = dir;
 		file = documentsDir.createFile('test_data_'+ dataCollector.startTime+'.json');
+		file.openStream("rw",writeToStream,onResolveError);
+	}
+	
+	/**
+	 * Saves the File on to the watch on success
+	 * @param dir Path of save Folder
+	 */
+	function onResolveSuccessExerciseList() {
+		file = documentsDir.deleteFile('exercise_list.txt');
+		file = documentsDir.createFile('exercise_list.txt');
 		file.openStream("rw",writeToStream,onResolveError);
 	}
 	 

@@ -16,11 +16,12 @@
     <script src="js/lowBatteryCheck.js"></script>
  </head>
 <body>
-	<div id="exerciseMenu" style="visibility: visible;">
-		<table id="exerciseTable" style="width:100%; height:100%; font-size: 1.5em;">
+	<div id="exerciseMenu" style="width:100%; height:100%; visibility: visible;">
+		<table id="exerciseTable" style="font-size: 1.5em;">
 		</table>
 	</div>
-	<div id="mainBody" style="visibility: hidden;">
+	
+	<div id="mainBody" style="width:100%; height:100%; visibility: hidden; margin-top: 0em">
 		<div class="ui-page ui-page-active" id="main">
 			<div class="ui-content content-padding">
 				<div class="timerDiv">
@@ -30,6 +31,7 @@
 					</span>
 				</div>
 				<div class="buttonDiv">
+					<button id="learn">Learn</button>
 					<button id="start">Start</button>
 					<button id="stop">Stop</button>
 				</div>	

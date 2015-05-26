@@ -10,6 +10,7 @@ $(window).load(function()
 {
 	try{
 		$("#start").click(startingApp);
+		$("#learn").click(startingLearning);
 		$("#stop").click(stoppingApp);
 		
 		tizen.filesystem.resolve('documents', readExerciseList, onResolveError, 'rw');
@@ -60,12 +61,16 @@ $(window).load(function()
 
 });
 
+/**
+ * 
+ * @param dir
+ */
 function readExerciseList(dir)
 {
 	try
 	{
 		var documentsDir = dir;
-		file = documentsDir.resolve('exerciseList.txt');
+		file = documentsDir.resolve('exercise_list.txt');
 		file.openStream("r",readToStream,onResolveError);
 	}
 	catch (e)
@@ -74,44 +79,46 @@ function readExerciseList(dir)
 	}
 }
 
+/**
+ * 
+ * @param fileStream
+ */
 function readToStream(fileStream){
 	try {
-	var test = fileStream.read(4096);
-	
-	var separator = 0;
-	while(test.search(",") != -1)
-	{
-		var exerciseName = test.substring(separator,test.indexOf(","))
-		var test = test.substring(test.indexOf(",")+1,test.length)
-		array[array.length] = exerciseName;
-	}
-	fileStream.close();
+		var test = fileStream.read(4096);
+		var json = JSON.parse(test);
+		fileStream.close();
 	}catch(exc){
 		console.log('Could not write to file: ' + exc.message);
 	}
 	
-	var i = 0;
-	while(i<array.length)
+	for(var i = 0; i<json.exercises.length; i++)
 	{
 		var tableRef = document.getElementById("exerciseTable");
 		var newRow = tableRef.insertRow(i);
 		newRow.style.height = "2em";
 		newRow.style.borderBottom = "1pt solid yellow";
 		var newCell  = newRow.insertCell(0);
-		newCell.id = "exercise_" + array[i];
-		var newText  = document.createTextNode(array[i]);
+		newCell.id = "exercise_" + json.exercises[i].guid;
+		var newText  = document.createTextNode(json.exercises[i].name);
 		newCell.appendChild(newText);
-		$("#exercise_" + array[i]).click({exercisename: array[i]}, setExercise);
-		i++;
+		$("#exercise_" + json.exercises[i].guid).click({exerciseid: json.exercises[i].guid, exercisename: json.exercises[i].name}, setExercise);
 	}
 }
 
+/**
+ * 
+ */
 function startingApp()
 {
-	window.setTimeout(bla, 3000);
+	console.log("START");
+	window.setTimeout(startDataCollecting, 3000);
 }
 
-function bla()
+/**
+ * 
+ */
+function startDataCollecting()
 {
 	try
 	{
@@ -124,14 +131,32 @@ function bla()
 	}
 }
 
+/**
+ * 
+ */
+function startingLearning(){
+	for(var i = 0; i < 10; i++)
+		{
+			startingApp();
+			window.setTimeout(stoppingApp(), 5000);
+		}
+}
+
+/**
+ * 
+ * @param event
+ */
 function setExercise(event)
 {
 	try
 	{
-		var exercise = event.data.exercisename;
-		dbManager.setExercise(exercise);
-		$('#exerciseName').html("Ex: "+ exercise);
+		var exercisename = event.data.exercisename;
+		var exerciseid = event.data.exerciseid;
+		dbManager.setExercise(exerciseid);
+		$('#exerciseName').html("Ex: "+ exercisename);
 		document.getElementById('mainBody').style.visibility = 'visible';
+		document.getElementById('exerciseMenu').style.visibility = 'hidden';
+		$('#exerciseTable').remove();
 	}
 	catch (e)
 	{
@@ -139,11 +164,20 @@ function setExercise(event)
 	}
 }
 
+/**
+ * 
+ * @param event
+ */
 function openExerciseMenu(event)
 {
 	try
 	{
 		document.getElementById('mainBody').style.visibility = 'hidden';
+		document.getElementById('exerciseMenu').style.visibility = 'visible';
+		var ele = document.createElement("TABLE");
+		ele.id = "exerciseTable";
+		document.getElementById('exerciseMenu').appendChild(ele);
+		tizen.filesystem.resolve('documents', readExerciseList, onResolveError, 'rw');
 	}
 	catch (e)
 	{
@@ -151,8 +185,12 @@ function openExerciseMenu(event)
 	}
 }
 
+/**
+ * 
+ */
 function stoppingApp()
 {
+	console.log("STOPP");
 	try
 	{
 		dbManager.sendToPhone();

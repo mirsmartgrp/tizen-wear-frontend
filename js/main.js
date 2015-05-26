@@ -153,7 +153,7 @@ function setExercise(event)
 		var exercisename = event.data.exercisename;
 		var exerciseid = event.data.exerciseid;
 		dbManager.setExercise(exerciseid);
-		$('#exerciseName').html("Ex: "+ exercisename);
+		$('#exerciseName').html(exercisename);
 		document.getElementById('mainBody').style.visibility = 'visible';
 		document.getElementById('exerciseMenu').style.visibility = 'hidden';
 		$('#exerciseTable').remove();

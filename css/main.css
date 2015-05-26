@@ -11,7 +11,20 @@
 	height: 3.5em
 }
 
+.exerciseDiv{
+	height: 50%;
+	font-size:1.25em;
+	overflow-y: scroll;
+}
+
 .timerDiv{
 	font-size:1.5em;
-	margin-bottom: 1.0em;
+	position: absolute;
+	bottom: 125px;
+}
+
+.buttonDiv{
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
 }

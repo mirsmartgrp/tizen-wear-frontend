@@ -111,9 +111,10 @@ function readToStream(fileStream){
  */
 function startingApp()
 {
-	console.log("START");
-	window.setTimeout(startDataCollecting, 3000);
+	dataCollector.setLearn(0);
+	window.setTimeout(startDataCollecting, 2000);
 }
+
 
 /**
  * 
@@ -135,11 +136,10 @@ function startDataCollecting()
  * 
  */
 function startingLearning(){
-	for(var i = 0; i < 10; i++)
-		{
-			startingApp();
-			window.setTimeout(stoppingApp(), 5000);
-		}
+	dataCollector.setLearn(2000);
+	dataCollector.setLearnCounter(0);
+	window.setTimeout(startDataCollecting, 2000);
+	
 }
 
 /**
@@ -176,6 +176,7 @@ function openExerciseMenu(event)
 		document.getElementById('exerciseMenu').style.visibility = 'visible';
 		var ele = document.createElement("TABLE");
 		ele.id = "exerciseTable";
+		ele.style.fontSize = "1.5em";
 		document.getElementById('exerciseMenu').appendChild(ele);
 		tizen.filesystem.resolve('documents', readExerciseList, onResolveError, 'rw');
 	}

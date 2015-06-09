@@ -36,6 +36,12 @@ var connection = (function(){
 	 */
 	my.onReceive = function(id, data)
 	{
+		console.log(id + " " + data);
+		var json = Json.parse(data);
+		if(json.selected !== undefined)
+			{
+				var guid = json.selected
+			}
 		for(var i = 0;i<receiveCallbacks.length;i++){
 			receiveCallbacks[i](id,data);
 		}

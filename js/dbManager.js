@@ -2,6 +2,7 @@ var dbManager = (function(){
 	var my = {};
 	var result;
 	var exercise;
+	var json;
 	
 	/**
 	 * sets exercise name
@@ -10,6 +11,38 @@ var dbManager = (function(){
 	my.setExercise = function(exercisename)
 	{
 		exercise = exercisename;
+	}
+	
+	my.createExerciseJson = function(dir)
+	{		
+		var documentsDir = dir;
+		file = documentsDir.resolve('exercise_list.txt');
+		file.openStream("r",readToStream,onResolveError);
+	}
+	
+	my.getExerciseJson = function()
+	{
+			return json;
+	}
+	
+	function readToStream(fileStream)
+	{
+		try {
+			var test = fileStream.read(4096);
+			json = JSON.parse(test);
+			fileStream.close();
+		}catch(exc){
+			console.log('Could not write to file: ' + exc.message);
+		}
+	}
+	
+	/**
+	 * sets exercise name
+	 * @param exercisename
+	 */
+	my.setExerciseById = function(exerciseid)
+	{
+		exerciseid;
 	}
 	
 	/**

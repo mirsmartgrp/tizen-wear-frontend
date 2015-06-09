@@ -13,7 +13,8 @@ $(window).load(function()
 		$("#learn").click(startingLearning);
 		$("#stop").click(stoppingApp);
 		
-		tizen.filesystem.resolve('documents', readExerciseList, onResolveError, 'rw');
+		tizen.filesystem.resolve('documents', dbManager.createExerciseJson, onResolveError, 'rw');
+		createExerciseList();
 		
 		document.addEventListener('tizenhwkey', function(e)
 		{
@@ -61,37 +62,15 @@ $(window).load(function()
 
 });
 
-/**
- * 
- * @param dir
- */
-function readExerciseList(dir)
-{
-	try
-	{
-		var documentsDir = dir;
-		file = documentsDir.resolve('exercise_list.txt');
-		file.openStream("r",readToStream,onResolveError);
-	}
-	catch (e)
-	{
-		console.log(e);
-	}
-}
 
 /**
  * 
  * @param fileStream
  */
-function readToStream(fileStream){
-	try {
-		var test = fileStream.read(4096);
-		var json = JSON.parse(test);
-		fileStream.close();
-	}catch(exc){
-		console.log('Could not write to file: ' + exc.message);
-	}
-	
+function createExerciseList(){
+		var json = dbManager.getExerciseJson();
+		console.log(json);
+		
 	for(var i = 0; i<json.exercises.length; i++)
 	{
 		var tableRef = document.getElementById("exerciseTable");

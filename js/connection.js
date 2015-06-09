@@ -36,11 +36,29 @@ var connection = (function(){
 	 */
 	my.onReceive = function(id, data)
 	{
-		console.log(id + " " + data);
-		var json = Json.parse(data);
-		if(json.selected !== undefined)
+	
+		var jsonData = JSON.parse(data);
+		if(jsonData.selected !== undefined)
 			{
-				var guid = json.selected
+				var guid = jsonData.selected
+				var json = dbManager.getExerciseJson();
+				var ex;
+				for(var i =0;i<json.exercises.length;i++){
+					if(json.exercises[i].guid == guid){
+						ex = json.exercises[i];
+						break;
+					}
+				}
+				if(ex !== undefined){
+					console.log(ex.name);
+					exercise = ex.name;
+					$('#exerciseName').html(ex.name);
+					document.getElementById('mainBody').style.visibility = 'visible';
+					document.getElementById('exerciseMenu').style.visibility = 'hidden';
+					$('#exerciseTable').remove();
+					
+				}
+				
 			}
 		for(var i = 0;i<receiveCallbacks.length;i++){
 			receiveCallbacks[i](id,data);

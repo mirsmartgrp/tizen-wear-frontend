@@ -13,8 +13,10 @@ $(window).load(function()
 		$("#learn").click(startingLearning);
 		$("#stop").click(stoppingApp);
 		
-		tizen.filesystem.resolve('documents', dbManager.createExerciseJson, onResolveError, 'rw');
-		createExerciseList();
+		tizen.filesystem.resolve('documents',function(e){
+			dbManager.createExerciseJson(e);
+			
+		}, onResolveError, 'rw');
 		
 		document.addEventListener('tizenhwkey', function(e)
 		{
@@ -69,7 +71,7 @@ $(window).load(function()
  */
 function createExerciseList(){
 		var json = dbManager.getExerciseJson();
-		console.log(json);
+
 		
 	for(var i = 0; i<json.exercises.length; i++)
 	{
@@ -157,7 +159,7 @@ function openExerciseMenu(event)
 		ele.id = "exerciseTable";
 		ele.style.fontSize = "1.5em";
 		document.getElementById('exerciseMenu').appendChild(ele);
-		tizen.filesystem.resolve('documents', readExerciseList, onResolveError, 'rw');
+		createExerciseList();
 	}
 	catch (e)
 	{

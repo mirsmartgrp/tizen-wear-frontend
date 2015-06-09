@@ -31,6 +31,7 @@ var dbManager = (function(){
 			var test = fileStream.read(4096);
 			json = JSON.parse(test);
 			fileStream.close();
+			createExerciseList();
 		}catch(exc){
 			console.log('Could not write to file: ' + exc.message);
 		}

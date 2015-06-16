@@ -88,7 +88,7 @@ function createExerciseList(){
 }
 
 /**
- * 
+ * Starts Data Collection
  */
 function startingApp()
 {
@@ -98,7 +98,7 @@ function startingApp()
 
 
 /**
- * 
+ * Starts Data Collection for learn button
  */
 function startDataCollecting()
 {
@@ -114,7 +114,7 @@ function startDataCollecting()
 }
 
 /**
- * 
+ * setting learn timeout
  */
 function startingLearning(){
 	dataCollector.setLearn(2000);
@@ -124,7 +124,7 @@ function startingLearning(){
 }
 
 /**
- * 
+ *  sets selected exercise
  * @param event
  */
 function setExercise(event)
@@ -146,7 +146,7 @@ function setExercise(event)
 }
 
 /**
- * 
+ * opens exerciseList and closes timer
  * @param event
  */
 function openExerciseMenu(event)
@@ -168,7 +168,7 @@ function openExerciseMenu(event)
 }
 
 /**
- * 
+ * stops data collection process
  */
 function stoppingApp()
 {
